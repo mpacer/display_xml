@@ -32,22 +32,25 @@ class XML:
         '''
         Parameters
         ----------
-        in_obj : str lxml.etree._Element, lxml.ettree._ElementTree, or bytes
+        in_obj : str, lxml.etree._Element, lxml.etree._ElementTree, or bytes
             Object to be displayed as html
         style : str, optional
             Pygment style names (the default is 'default')
         '''
         if template is None:
-            template = HTML_TEMPLATE
+            template = self.HTML_TEMPLATE
         
-        if isinstance(in_obj, str):
-            self.xml = et.fromstring(in_obj, parser=no_blank_parser)
-        elif isinstance(in_obj, bytes): 
+        if isinstance(in_obj, (str, bytes)):
             self.xml = et.fromstring(in_obj, parser=no_blank_parser)
         elif isinstance(in_obj, et._ElementTree):
             self.xml = in_obj.getroot()
-        else:  # assume isinstance(in_obj, et._Element)
+        elif isinstance(in_obj, et._Element):
             self.xml = in_obj
+        else:
+            raise TypeError(f"{in_obj} is of type {type(in_obj)}."
+                            "This object only can displays objects of type "
+                            "str, bytes, lxml.etree._ElementTree, or "
+                            "lxml.etree._Element.")
         
         self.text = et.tostring(self.xml, pretty_print=True)
         self.style = style
