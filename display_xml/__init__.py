@@ -9,6 +9,7 @@ from IPython.display import display
 
 no_blank_parser = et.XMLParser(remove_blank_text=True)
 
+__version__ = "0.1.0"
 
 class XML:
     '''Class for displaying XML in a pretty way that supports pygments styles.
