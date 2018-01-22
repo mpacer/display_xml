@@ -46,6 +46,11 @@ templates_path = ['_templates']
 #
 source_suffix = ['.rst', '.md']
 
+# -- Other source parsers -------------------------------------------------
+
+# this is manually added to include the commonmark source parsers
+source_parsers = {'.md': CommonMarkParser}
+
 # The master toctree document.
 master_doc = 'index'
 
@@ -157,9 +162,5 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-# -- Other source parsers -------------------------------------------------
-
-# this is manually added to include the commonmark source parsers
-# source_parsers = {'.md': CommonMarkParser}
 
 

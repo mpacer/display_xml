@@ -12,7 +12,7 @@ Welcome to display_xml's documentation!
    :caption: User Documentation
    
    xml
-   
+   changelog
 
 
 
