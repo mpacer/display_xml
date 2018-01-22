@@ -3,11 +3,12 @@ Setup module for the display_xml python package
 """
 import setuptools
 from setupbase import (
-    ensure_python, find_packages
+    ensure_python, find_packages, get_version
     )
 
 setup_dict = dict(
     name='display_xml',
+    version=get_version('display_xml/_version.py'),
     description='Prettier XML in IPython/Jupyter display contexts.',
     packages=find_packages(),
     author          = 'M Pacer',
@@ -25,9 +26,9 @@ setup_dict = dict(
         'Programming Language :: Python :: 3',
     ],
     install_requires=[
-        'Pygments>=2.2.0',
-        'ipython>=6.2.1',
-        'lxml>=4.1.1'
+        'ipython>6.2.1',
+        'pygments>=2.2.0',
+        'lxml>=4.1.1',
     ]
 )
 
@@ -40,9 +41,7 @@ except ValueError as e:
                           setup_dict["python_requires"])
                      )
 
-from display_xml import __version__
 
 setuptools.setup(
-    version=__version__,
     **setup_dict
 )
