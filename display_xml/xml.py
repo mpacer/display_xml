@@ -27,7 +27,7 @@ class XML:
         "<hr/>"
         )
 
-    def __init__(self, in_obj, style='default', template=HTML_TEMPLATE, 
+    def __init__(self, in_obj, style='default', template=None, 
                  extras={}):
         '''
         Parameters
@@ -37,6 +37,9 @@ class XML:
         style : str, optional
             Pygment style names (the default is 'default')
         '''
+        if template is None:
+            template = HTML_TEMPLATE
+        
         if isinstance(in_obj, str):
             self.xml = et.fromstring(in_obj, parser=no_blank_parser)
         elif isinstance(in_obj, bytes): 
@@ -83,6 +86,13 @@ class XML:
     
     @property
     def style_css(self):
+        """
+        Generates the css classes needed to apply this uniquely. 
+        
+        TODO: it might be nice to move toward a vdom based displayer for more versatile control
+        
+        TODO: figure out a way to add a toggleable arrow for collapsing this
+        """
         temp_css = self.formatter.get_style_defs()
         css_list = [f"div.{self.uuid_class} {x}" for x in temp_css.split("\n")]
         return "\n".join(css_list)
