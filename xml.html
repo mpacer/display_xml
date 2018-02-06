@@ -1,0 +1,140 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>XML &#8212; display_xml 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog for display_xml" href="changelog.html" />
+    <link rel="prev" title="Welcome to display_xml’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-display_xml.xml">
+<span id="xml"></span><h1>XML<a class="headerlink" href="#module-display_xml.xml" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="display_xml.xml.XML">
+<em class="property">class </em><code class="descclassname">display_xml.xml.</code><code class="descname">XML</code><span class="sig-paren">(</span><em>in_obj</em>, <em>style='default'</em>, <em>template=None</em>, <em>extras={}</em><span class="sig-paren">)</span><a class="headerlink" href="#display_xml.xml.XML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for displaying XML in a pretty way that supports pygments styles.</p>
+<dl class="method">
+<dt id="display_xml.xml.XML.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>in_obj</em>, <em>style='default'</em>, <em>template=None</em>, <em>extras={}</em><span class="sig-paren">)</span><a class="headerlink" href="#display_xml.xml.XML.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>in_obj <span class="classifier-delimiter">:</span> <span class="classifier">str, lxml.etree._Element, lxml.etree._ElementTree, or bytes</span></dt>
+<dd>Object to be displayed as html</dd>
+<dt>style <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd>Pygment style names (the default is ‘default’)</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="display_xml.xml.XML.display_all_styles">
+<em class="property">classmethod </em><code class="descname">display_all_styles</code><span class="sig-paren">(</span><em>in_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#display_xml.xml.XML.display_all_styles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays all available pygments styles using XML.style_gen()</p>
+<dl class="docutils">
+<dt>in_obj: str lxml.etree._Element, lxml.ettree._ElementTree, or bytes</dt>
+<dd>Object to be displayed as html</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="display_xml.xml.XML.style_gen">
+<em class="property">classmethod </em><code class="descname">style_gen</code><span class="sig-paren">(</span><em>in_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#display_xml.xml.XML.style_gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator for iterating over all of the styles available from pygments.</p>
+<p>If you declare this xml = XML.style_gen(text), use next(xml).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="display_xml.xml.XML.style_css">
+<code class="descname">style_css</code><a class="headerlink" href="#display_xml.xml.XML.style_css" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the css classes needed to apply this uniquely.</p>
+<p>TODO: it might be nice to move toward a vdom based displayer for more versatile control</p>
+<p>TODO: figure out a way to add a toggleable arrow for collapsing this</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to display_xml’s documentation!</a></li>
+      <li>Next: <a href="changelog.html" title="next chapter">Changelog for display_xml</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/xml.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, M Pacer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/xml.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
