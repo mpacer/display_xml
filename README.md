@@ -39,7 +39,7 @@ Once you know the style you want, pass that string in as an argument to `XML`:
 
 ```python
 from display_xml import XML
-XML.display_all_styles('<body><tag>content</tag></body>', style='perldoc')
+XML('<body><tag>content</tag></body>', style='perldoc')
 ```
 
 ![styled single xml example](./images/styled_single_xml_screenshot.png)
