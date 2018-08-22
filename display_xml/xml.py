@@ -5,7 +5,7 @@ from pygments.styles import get_all_styles
 import lxml.etree as et
 from uuid import uuid4
 
-from IPython.display import display
+from IPython.display import display, update_display
 
 no_blank_parser = et.XMLParser(remove_blank_text=True)
 
@@ -28,7 +28,7 @@ class XML:
         )
 
     def __init__(self, in_obj, style='default', template=None, 
-                 extras={}):
+                 extras={}, disp_id=None):
         '''
         Parameters
         ----------
@@ -53,11 +53,25 @@ class XML:
                             "lxml.etree._Element.")
         
         self.text = et.tostring(self.xml, pretty_print=True)
-        self.style = style
+        self._style = style
         self.formatter = HtmlFormatter(style=self.style)
         self.uuid_class = "a"+str(self.uuid)
         self.template = template
         self.extras = extras
+        if disp_id:
+            self.disp_id = disp_id
+            update_display(self,display_id=self.disp_id)
+    @property
+    def style(self):
+        return self._style
+        
+    @style.setter
+    def style(self, val):
+        if val in get_all_styles():
+            self._style = val
+            self.formatter = HtmlFormatter(style=self.style)
+            if self.disp_id:
+                update_display(self, display_id=self.disp_id)
     
     @classmethod
     def display_all_styles(cls, in_obj):
