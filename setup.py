@@ -5,7 +5,7 @@ import setuptools
 from setupbase import (
     ensure_python, find_packages, get_version
     )
-    
+
 setup_dict = dict(
     name='display_xml',
     version=get_version('display_xml/_version.py'),
@@ -29,6 +29,7 @@ setup_dict = dict(
         'ipython>=6.2.1',
         'pygments>=2.2.0',
         'lxml>=4.1.1',
+        'pytest>=3.0'
     ]
 )
 
