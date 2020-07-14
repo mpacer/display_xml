@@ -14,7 +14,7 @@ from IPython.display import display
 no_blank_parser = et.XMLParser(remove_blank_text=False)
 
 
-def tostring(element, hook=None, indent=0, pretty_print=False):
+def tostring(element, hook=None, indent=0, indent_increment_size=1):
     """Turn XML element to string.
 
     Applied recursively (depth first to all elements in the tree.
@@ -30,14 +30,14 @@ def tostring(element, hook=None, indent=0, pretty_print=False):
         entire element. This can be used to have more control over the
         formatting of the element.
     indent: int
-        Default indentation level.
-    pretty_print: bool
-        Whether to turn pretty printing on or of. When on, the indentation
-        level is increased by 2 with each level in the tree.
+        Indentation level for element.
+    indent_increment_size: bool
+        By how much to increase the indentation level when going
+        deeper into the tree.
     """
-    child_indent = (indent + 2) if pretty_print else indent
+    child_indent = indent + indent_increment_size
     children = ''.join(
-        tostring(child, hook, child_indent, pretty_print)
+        tostring(child, hook, child_indent, indent_increment_size)
         for child in element
     )
     attributes = ' '.join(
@@ -83,16 +83,28 @@ class XML:
         "<hr/>"
         )
 
+    _other_params_docstring = """expand: bool
+        Whether or not to expand the XML elements by default.
+    pretty_print: int
+        By how much to increase the indentation level between parent element
+        and child element.
+    """
+
     def __init__(self, in_obj, style='default', template=None,
-                 extras=None, expand=False, pretty_print=True):
-        '''
+                 extras=None, expand=False, pretty_print=1):
+        f"""
         Parameters
         ----------
         in_obj : str, lxml.etree._Element, lxml.etree._ElementTree, or bytes
             Object to be displayed as html
         style : str, optional
             Pygment style names (the default is 'default')
-        '''
+        expand: bool
+            Whether or not to expand the XML elements by default.
+        pretty_print: int
+            By how much to increase the indentation level between parent element
+            and child element.
+        """
         if extras is None:
             extras = {}
 
@@ -138,9 +150,8 @@ class XML:
         details.append(root)
         return details
 
-
     @classmethod
-    def display_all_styles(cls, in_obj):
+    def display_all_styles(cls, in_obj, **kwargs):
         """
         Displays all available pygments styles using XML.style_gen()
 
@@ -149,22 +160,28 @@ class XML:
 
         in_obj: str lxml.etree._Element, lxml.ettree._ElementTree, or bytes
             Object to be displayed as html
-        """
-        for disp in cls.style_gen(in_obj):
+        kwargs: passed to cls.style_gen method.
+        """.format(cls._other_params_docstring)
+        for disp in cls.style_gen(in_obj, **kwargs):
             display(disp)
 
     @classmethod
-    def style_gen(cls, in_obj):
+    def style_gen(cls, in_obj, **kwargs):
         """
         Generator for iterating over all of the styles available from pygments.
 
         If you declare this xml = XML.style_gen(text), use next(xml).
+
+        in_obj: str lxml.etree._Element, lxml.ettree._ElementTree, or bytes
+            Object to be displayed as html
+        kwargs: passed to cls.__init__.
         """
         for style in get_all_styles():
             yield(cls(in_obj,
                       style=style,
                       template=cls.NAMED_STYLE_TEMPLATE,
-                      extras={"style_name": style}
+                      extras={"style_name": style},
+                      **kwargs
                       ))
 
     @property
@@ -172,7 +189,8 @@ class XML:
         """
         Generates the css classes needed to apply this uniquely.
 
-        TODO: it might be nice to move toward a vdom based displayer for more versatile control
+        TODO: it might be nice to move toward a vdom based displayer
+        for more versatile control
         """
         details_css = """
 {div} pre {{ margin: 0 0; font-family: inherit;}} /* consistent font for opening and closing tags */
@@ -195,7 +213,7 @@ class XML:
         content = tostring(
             self._xml,
             hook=self._foldable_to_string_hook,
-            pretty_print=self.pretty_print
+            indent_increment_size=int(self.pretty_print)
         )
         return self.template.format(
             uuid_class=self.uuid_class,
